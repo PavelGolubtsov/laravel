@@ -6,6 +6,9 @@
 
 @section('styles')
 <style>
+    .row{
+        justify-content: center;
+    }
     .card-container {
         height: 350px;
     }

@@ -19,7 +19,7 @@ class ProductFactory extends Factory
                 $this->faker->randomNumber() . ' ' .
                 $this->faker->words(2, true),
             'description' => $this->faker->sentence(10),
-            'price' => $this->faker->randomFloat(2, 1, 999999.99),
+            'price' => $this->faker->randomFloat(2, 1, 99999.99),
             'category_id' => Category::get()->random()->id,
             'picture' => 'nopicture.png'
         ];

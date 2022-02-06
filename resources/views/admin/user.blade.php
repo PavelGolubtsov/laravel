@@ -4,6 +4,20 @@
     {{ $title }}
 @endsection
 
+@section('styles')
+<style>
+    #iter-user{
+        text-align: center;
+        border: 1px solid;
+        border-radius: 8px;
+        background-color: rgb(0 255 100 / 50%);
+    }
+    #iter-user:hover{
+        background-color: rgb(0 255 100);
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <h1>{{ $title }}</h1>
@@ -15,6 +29,7 @@
                     <th>Имя</th>
                     <th>Email</th>
                     <th>Картинка</th>
+                    <th>Войти</th>
                 </tr>
                     @foreach($users as $user)
                         <tr>
@@ -23,7 +38,7 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->picture }}</td>
                             <td>
-                            <a class="dropdown-item" href="{{ route('enterAsUser', $user->id) }}">Войти</a>
+                            <a id="iter-user" class="dropdown-item" href="{{ route('enterAsUser', $user->id) }}">Войти</a>
                             </td>
                         </tr>
                     @endforeach

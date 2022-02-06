@@ -44,9 +44,9 @@
                 <form method="post" action="{{ route('removeProduct') }}">
                     @csrf
                     <input name='id' hidden value="{{ $product->id }}">
-                    <button @empty(session("cart.$product->id")) disabled @endempty class="btn btn-danger">-</button>
+                    <button @empty(session("products.{$product->id}")) disabled @endempty class="btn btn-danger">-</button>
                 </form>
-                {{ session("cart.$product->id") ?? 0 }}
+                {{ session("products.{$product->id}") ?? 0 }}
                 <form method="post" action="{{ route('addProduct') }}">
                     @csrf
                     <input name='id' hidden value="{{ $product->id }}">

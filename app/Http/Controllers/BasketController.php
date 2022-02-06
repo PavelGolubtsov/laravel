@@ -17,29 +17,6 @@ use Illuminate\Support\Facades\Mail;
 class BasketController extends Controller
 {
 
-    /*
-    public function index () {
-        $cart = session('products');
-        $mainAddress = null;
-        $email = null;
-        $name = null;
-        $user = Auth::user();
-        if ($user) {
-            $mainAddress = Address::where('user_id', Auth::user()->id)->where('main', 1)->first();
-            $email = $user->email;
-            $name = $user->name;
-        }
-        $products = Product::whereIn('id', array_keys($cart))
-                        ->get()
-                        ->transform(function ($product) use ($cart) {
-                            $product->quantity = $cart[$product->id];
-                            return $product;
-                        });
-
-        return view('basket', compact('products', 'mainAddress', 'user', 'name', 'email'));
-    }
-    */
-
     public function index ()
     {
         $cart = session('products');
@@ -62,7 +39,7 @@ class BasketController extends Controller
             ];
         })->values();
 
-        return view('basket', compact('products', 'mainAddress', 'email', 'name'));
+        return view('basket', compact('products', 'mainAddress', 'email', 'name', 'user'));
     }
 
     public function add ()
@@ -78,9 +55,11 @@ class BasketController extends Controller
 
         session()->put('products', $products);
         session()->save();
+        return back();
         return [
             'quantity' => $products[$id],
-            'basketProductsQuantity' => collect($products)->sum()
+            'basketProductsQuantity' => collect($products)->sum(),
+
         ];
     }
 
@@ -101,6 +80,7 @@ class BasketController extends Controller
 
         session()->put('products', $products);
         session()->save();
+        return back();
         return [
             'quantity' => $products[$id] ?? 0,
             'basketProductsQuantity' => collect($products)->sum()

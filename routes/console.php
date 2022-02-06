@@ -64,7 +64,7 @@ Artisan::command('importCategories', function () {
 });
 
 Artisan::command('createRolesUsers', function () {
-/*    
+/* 
     collect(['Admin', 'Manager', 'Customer'])->each(function ($role, $idx) {
         $role = new Role([
             'name' => $role
@@ -72,12 +72,14 @@ Artisan::command('createRolesUsers', function () {
         $role->save();
      });
 */
-    $user = User::find(3);
+
+    $user = User::find(1);
 
     collect(['Admin', 'Manager', 'Customer'])->each(function ($name, $idx) use ($user) {
         $role = Role::where('name', $name)->first();
         $user->roles()->attach($role);
     });
+
 /*
     $user->roles->each(function ($role) {
         dump($role->pivot->created_at->toDateTimeString());
@@ -92,15 +94,16 @@ Artisan::command('inspire', function () {
     $procs = new Category();
     $procs->name = 'Диски';
     $procs->description = 'Описание дисков';
-    $procs->picture = '2.jpg';
-    //$procs->save();
+//    $procs->picture = '';
+//    $procs->save();
 
 // Заполняет поля разрешенные в модели Category!!!
-    // Category::create([
-    //     'name' => 'Жесткие диски',
-    //     'description' => 'SSD, HDD',
-    //     'picture' => '2.jpg'
-    // ]);
-
+/*
+     Category::create([
+         'name' => 'Шины',
+         'description' => 'Описание шин',
+         'picture' => ''
+     ]);
+*/
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');

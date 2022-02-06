@@ -14,6 +14,7 @@
 @section('content')
 <div class="container">
     <table class="table table-bordered">
+        @if ($products->count())
         <thead>
             <tr>
                 <th>Наименование</th>
@@ -22,13 +23,16 @@
                 <th>Сумма</th>
             </tr>
         </thead>
+        @endif
         <tbody>
             @php
                 $summ = 0;
             @endphp
             @forelse ($products as $product)
-            
-                
+                @php
+                    $productSumm = $product['price'] * $product['quantity'];
+                    $summ += $productSumm;
+                @endphp
                 <tr>
                     <td>{{$product['name']}}</td>
                     <td>{{$product['price']}}</td>
@@ -56,6 +60,7 @@
                     </td>
                 </tr>
             @endforelse
+                @if ($products->count())
                 <tr>
                     <td colspan="3" class="text-end">Итого:</td>
                     <td>
@@ -64,6 +69,7 @@
                         </strong>
                     </td>
                 </tr>
+                @endif
         </tbody>
     </table>
     @if ($products->count())

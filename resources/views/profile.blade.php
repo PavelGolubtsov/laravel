@@ -53,7 +53,7 @@
                     Имя
                 </label>
                 <input
-                class="form-control @if ($errors->has('name')) text-danger @endif" 
+                class="form-control" @if ($errors->has('name')) text-danger @endif
                 name="name"
                 value="{{$user->name}}">
             </div>
